@@ -412,6 +412,7 @@ def options(opt):
     doxygen.add_program('doxygen')
     alsa = add_auto_option(opt, 'alsa', help='Enable ALSA driver', conf_dest='BUILD_DRIVER_ALSA')
     alsa.add_package('alsa', atleast_version='1.0.18')
+    alsa.add_library('lttng-ust')
     firewire = add_auto_option(opt, 'firewire', help='Enable FireWire driver (FFADO)', conf_dest='BUILD_DRIVER_FFADO')
     firewire.add_package('libffado', atleast_version='1.999.17')
     freebob = add_auto_option(opt, 'freebob', help='Enable FreeBob driver')

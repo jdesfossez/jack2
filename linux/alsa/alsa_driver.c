@@ -33,6 +33,7 @@
 #include <sys/types.h>
 #include <sys/time.h>
 #include <string.h>
+#include <lttng/tracef.h>
 
 #include "alsa_driver.h"
 #include "hammerfall.h"
@@ -1211,6 +1212,7 @@ alsa_driver_xrun_recovery (alsa_driver_t *driver, float *delayed_usecs)
 		snd_pcm_status_get_tstamp(status,&now);
 		snd_pcm_status_get_trigger_tstamp(status, &tstamp);
 		timersub(&now, &tstamp, &diff);
+		tracef("xrun %.3f msecs", *delayed_usecs / 1000.0);
 		*delayed_usecs = diff.tv_sec * 1000000.0 + diff.tv_usec;
 		jack_log("**** alsa_pcm: xrun of at least %.3f msecs",*delayed_usecs / 1000.0);
 	}

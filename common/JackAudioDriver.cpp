@@ -18,6 +18,7 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 */
 
+#include <lttng/tracef.h>
 #include "JackSystemDeps.h"
 #include "JackAudioDriver.h"
 #include "JackTime.h"
@@ -210,6 +211,7 @@ synchronize to the end of client graph execution.
 int JackAudioDriver::ProcessAsync()
 {
     // Read input buffers for the current cycle
+    tracef("start");
     if (Read() < 0) {
         jack_error("JackAudioDriver::ProcessAsync: read error, stopping...");
         return -1;
@@ -226,6 +228,7 @@ int JackAudioDriver::ProcessAsync()
 
     // Keep end cycle time
     JackDriver::CycleTakeEndTime();
+    tracef("stop");
     return 0;
 }
 

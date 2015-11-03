@@ -91,6 +91,7 @@ def build(bld):
             ]
         includes = ['../linux', '../posix'] + includes
         uselib.append('RT')
+        uselib.append('LTTNG_UST')
         uselib.append('DL')
 
     if bld.env['IS_SUN']:

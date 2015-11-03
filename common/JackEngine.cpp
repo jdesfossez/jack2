@@ -22,6 +22,7 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #include <set>
 #include <assert.h>
 #include <ctype.h>
+#include <lttng/tracef.h>
 
 #include "JackSystemDeps.h"
 #include "JackLockedEngine.h"
@@ -218,6 +219,7 @@ void JackEngine::CheckXRun(jack_time_t callback_usecs)  // REVOIR les conditions
             jack_time_t finished_date = timing->fFinishedAt;
 
             if (status != NotTriggered && status != Finished) {
+		tracef("xrun++");
                 jack_error("JackEngine::XRun: client = %s was not finished, state = %s", client->GetClientControl()->fName, State2String(status));
                 fChannel.Notify(ALL_CLIENTS, kXRunCallback, 0);  // Notify all clients
             }
