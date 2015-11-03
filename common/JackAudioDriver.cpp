@@ -211,7 +211,7 @@ synchronize to the end of client graph execution.
 int JackAudioDriver::ProcessAsync()
 {
     // Read input buffers for the current cycle
-    tracef("start");
+    tracef("async_start");
     if (Read() < 0) {
         jack_error("JackAudioDriver::ProcessAsync: read error, stopping...");
         return -1;
@@ -228,7 +228,7 @@ int JackAudioDriver::ProcessAsync()
 
     // Keep end cycle time
     JackDriver::CycleTakeEndTime();
-    tracef("stop");
+    tracef("async_stop");
     return 0;
 }
 
@@ -286,6 +286,7 @@ if graph process succeed, output buffers computed at the *current cycle* are use
 
 int JackAudioDriver::ProcessSync()
 {
+    tracef("sync_start");
     // Read input buffers for the current cycle
     if (Read() < 0) {
         jack_error("JackAudioDriver::ProcessSync: read error, stopping...");
@@ -303,6 +304,7 @@ int JackAudioDriver::ProcessSync()
 
     // Keep end cycle time
     JackDriver::CycleTakeEndTime();
+    tracef("sync_stop");
     return 0;
 }
 
